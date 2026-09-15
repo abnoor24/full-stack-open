@@ -1,0 +1,17 @@
+.alert-box {
+  background-color: lightgrey;
+  color: green;
+  font-size: 1.6rem;
+  border: 3px solid green;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.error-box {
+  background-color: lightgrey;
+  color: red;
+  font-size: 1.6rem;
+  border: 3px solid red;
+  padding: 5px;
+  border-radius: 4px;
+}
