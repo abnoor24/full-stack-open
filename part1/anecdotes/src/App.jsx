@@ -32,6 +32,7 @@ const App = () => {
     }));
 
   const maxVotesIndex = selected.votes.indexOf(Math.max(...selected.votes));
+  selected;
 
   return (
     <main>
