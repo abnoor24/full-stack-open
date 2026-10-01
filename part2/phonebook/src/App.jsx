@@ -16,7 +16,7 @@ const App = () => {
   const [isShown, setIsShown] = useState({ status: "false", dialogue: "" });
 
   useEffect(() => {
-    console.log(phonebookServices.getAll());
+    // console.log(phonebookServices.getAll());
 
     try {
       phonebookServices.getAll().then((phonebook) => setPersons(phonebook));
@@ -25,8 +25,6 @@ const App = () => {
     }
   }, []);
 
-  const getData = async () => {};
-
   function changeFilter(event) {
     event.preventDefault();
     setFilter(event.target.value);
@@ -34,13 +32,11 @@ const App = () => {
 
   function handleNameInput(event) {
     event.preventDefault();
-
     setNewName(event.target.value);
   }
 
   function handleNumInput(event) {
     event.preventDefault();
-
     setNewNumber(event.target.value);
   }
 
@@ -57,7 +53,6 @@ const App = () => {
         )
       ) {
         const oldPerson = persons.find((person) => person.name === newName);
-        console.log(`oldPerson: ${oldPerson[0]}`);
         const updatePerson = { ...oldPerson, number: newNumber };
 
         phonebookServices
@@ -68,7 +63,14 @@ const App = () => {
                 person.id === updatedPerson.id ? updatedPerson : person,
               ),
             ),
-          );
+          )
+          .catch(() => {
+            setIsShown({
+              status: "404",
+              dialogue: `Information of ${deletePerson.name} has already been removed from the server`,
+            });
+            setPersons(persons.filter((p) => p.name !== newName));
+          });
 
         setIsShown({ status: "true", dialogue: `Updated Phone Number` });
       }
@@ -78,13 +80,14 @@ const App = () => {
 
       phonebookServices
         .create(newPerson)
-        .then((returnedPerson) =>
-          setPersons((prev) => [...prev, returnedPerson]),
-        )
-        .catch((e) => console.log(e));
-
-      setIsShown({ status: "true", dialogue: `Added ${newPerson.name}` });
+        .then((returnedPerson) => {
+          setPersons((prev) => [...prev, returnedPerson]);
+          setIsShown({ status: "true", dialogue: `Added ${newPerson.name}` });
+        })
+        .catch((e) => setIsShown({ status: "404", dialogue: e.message }));
     }
+    setNewName("");
+    setNewNumber("");
   }
 
   function deletePerson(id) {
@@ -100,30 +103,20 @@ const App = () => {
             dialogue: `Deleted ${deletePerson.name}`,
           });
         })
-        .catch((error) => {
-          if (error.response.status === 404) {
-            console.log(error);
-            setIsShown({
-              status: "404",
-              dialogue: `Information of ${deletePerson.name} has already been removed from the server`,
-            });
-          }
+        .catch(() => {
+          setIsShown({
+            status: "404",
+            dialogue: `Information of ${deletePerson.name} has already been removed from the server`,
+          });
+          setPersons(persons.filter((p) => p.name !== newName));
         });
     }
   }
 
-  useEffect(() => {
-    if (isShown.status === "true")
-      setTimeout(
-        () => setIsShown((prev) => ({ ...prev, status: "false" })),
-        5000,
-      );
-  }, [persons]);
-
   return (
     <div>
       <h2>Phonebook</h2>
-      <AlertBox isShown={isShown} />
+      <AlertBox isShown={isShown} setIsShown={setIsShown} />
       <Filter value={filter} onChange={changeFilter} />
 
       <PersonForm
