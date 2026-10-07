@@ -40,7 +40,7 @@ app.get('/info', async (req, res, next) => {
 app.get('/api/persons', async (req, res, next) => {
   try {
     const result = await Person.find({})
-    console.log(result)
+    //console.log(result)
     res.json(result)
   } catch (e) {
     next(e)
@@ -95,7 +95,7 @@ app.put('/api/persons/:id', async (req, res, next) => {
 
     const updatePerson = await Person.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      req.body
     )
 
     if (!updatePerson) {
