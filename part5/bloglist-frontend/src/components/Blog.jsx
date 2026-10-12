@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from 'react'
 import { addLikes, deleteBlog } from '../services/blogs'
 
 const Blog = ({ blog, setBlogs, notify }) => {
@@ -33,16 +33,16 @@ const Blog = ({ blog, setBlogs, notify }) => {
   return <div className="bloglist-item">
     <div className="bloglist-item-heading">{blog.title}{visible && ` - ${blog.author}`}
       <button onClick={toggleVisibility}>{visible? 'Hide' : 'Show'}</button>
-      </div>
+    </div>
     {visible && <>
       <div>URL: <a href={blog.url}>{blog.url}</a></div>
-      <div>Likes: {blog.likes} 
+      <div>Likes: {blog.likes}
         <button onClick={likes}>Like</button>
       </div>
       <div>Author: {blog.author}</div>
       <button id="delete-btn" onClick={deleteBtn}>Delete</button>
     </>}
-  </div>  
+  </div>
 }
 
 export default Blog

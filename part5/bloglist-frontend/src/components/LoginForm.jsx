@@ -4,21 +4,21 @@ const LoginForm = (props) => {
     <h2>Log in to application:</h2>
 
     <label>
-      <span>Username:</span> 
-      <input 
-      type="text"
-      name="username"
+      <span>Username:</span>
+      <input
+        type="text"
+        name="username"
       />
     </label>
- 
+
     <label>
-      <span>Password:</span> 
-      <input 
-      type="password" 
-      name="password"
+      <span>Password:</span>
+      <input
+        type="password"
+        name="password"
       />
     </label>
-    
+
     <button>Login</button>
   </form>
 }

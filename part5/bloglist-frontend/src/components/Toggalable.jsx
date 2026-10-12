@@ -1,19 +1,18 @@
-import { useState, useImperativeHandle } from "react"
+import { useState, useImperativeHandle } from 'react'
 
 export default function Toggalable(props){
 
   const [visible, setVisible] = useState(false)
 
 
-  const toggleVisibility = () => { 
+  const toggleVisibility = () => {
     return setVisible(prev => !prev)
   }
 
   useImperativeHandle(props.ref, () => {
-    return{toggleVisibility}
+    return{ toggleVisibility }
   })
-  
-  
+
   return <div>
     {visible && <div>
       <button onClick={toggleVisibility}>{props.buttonLabel}</button>

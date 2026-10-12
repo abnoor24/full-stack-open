@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 
-export default function Notification({notification}){
-  const {message, isError} = notification
+export default function Notification({ notification }){
+  const { message, isError } = notification
   if(!message)
     return null
 
