@@ -1,9 +1,8 @@
 import jwt from 'jsonwebtoken'
-import User from "../model/User.js"
-import { SECRET } from "./config.js"
+import User from '../model/User.js'
+import { SECRET } from './config.js'
 
 const errorHandler =(error,req,res,next) => {
-  
   if (error.name === 'CastError') {
     return res.status(400).send({ error: 'malformatted id' })
   } else if (error.name === 'ValidationError') {
@@ -32,16 +31,16 @@ const getTokenFrom = (req,res,next) => { //fix this 4.20
 
 const userExtractor = async (req, res, next) => {
   try{
-  const decodedToken = jwt.verify(req.token, SECRET)
-  if(!decodedToken.id)
-    return res.status(401).json({ error: 'invalid token'})
+    const decodedToken = jwt.verify(req.token, SECRET)
+    if(!decodedToken.id)
+      return res.status(401).json({ error: 'invalid token' })
 
-  const user = await User.findById(decodedToken.id)
-  if(!user)
-    return res.status(400).json({error: 'UserId missing or not valid.'})
+    const user = await User.findById(decodedToken.id)
+    if(!user)
+      return res.status(400).json({ error: 'UserId missing or not valid.' })
 
-  req.user = user
-  return next()
+    req.user = user
+    return next()
   }catch(e){next(e)}//error for invalid token exists in errorHandler
 }
 

@@ -6,7 +6,7 @@ const dummy = (blogs) => {
 
 const totalLikes = (blogs) => {
 	const total = blogs.reduce((total, item) => {return (total + item.likes)},0)
-	return total;
+	return total
 }
 
 

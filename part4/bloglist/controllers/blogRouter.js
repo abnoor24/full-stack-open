@@ -78,7 +78,28 @@ blogRouter.put('/:id', userExtractor , async (req,res,next) => {
     const updatedBlog = await Blog.findByIdAndUpdate(
       req.params.id,
       newBlog,
-      { new: true }
+      { returnDocument: 'after' }
+    )
+
+    if (!updatedBlog)
+      return res.status(404).json({ error: 'Blog not found' })
+
+    res.status(200).json(updatedBlog)
+  }catch(error){next(error)}
+})
+
+
+blogRouter.put('/likes/:id', userExtractor , async (req,res,next) => {
+  try{
+    const blog = await Blog.findById(req.params.id)
+
+    if (!blog)
+      return res.status(404).json({ error: 'Blog not found' })
+
+    const updatedBlog = await Blog.findByIdAndUpdate(
+      req.params.id,
+      { likes: blog.likes + 1 },
+      { returnDocument: 'after' }
     )
 
     if (!updatedBlog)

@@ -1,0 +1,150 @@
+*{
+  box-sizing: border-box;
+}
+body{
+  background-color: #1e1e1e;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+
+  padding: 0;
+  margin: 0;
+}
+main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+
+  color: whitesmoke;
+}
+
+h2{
+  font-size: 1.6rem;
+  margin: 0;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+button{
+  background-color: #f8f9fa;
+  border: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: #212529;
+  font-size: 0.8rem;
+
+  width: fit-content;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+/* CSS for all Forms */
+
+.form{
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
+  align-items: center;
+
+  min-height: 100px;
+  min-width: 310px;
+  gap: 5px;
+}
+
+.form > h2{
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.form > h4{
+  width: 100%;
+  text-align: left;
+  margin: 0;
+}
+
+.form > label{
+  display: flex;
+  align-items: center;
+}
+
+.form > label > span{
+  width: 100px;
+}
+
+.form > button{
+  margin-top: 10px;
+}
+
+
+/* User Menu */
+
+div.user-menu{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-menu > h4{
+  font-weight: 300;
+}
+
+/* Notification Bar */
+
+.notification{
+  position: absolute;
+  min-width: 100px;
+  min-height: 50px;
+
+  padding: 10px 20px;
+
+  background-color: #adb5bd;
+  color: green;
+
+  border-radius: 4px;
+  border: 4px green solid;
+
+  font-size: 1.6rem;
+  font-weight: 600;
+
+  /* margin: auto; */
+}
+
+div.error-msg{
+  color: red;
+  border: 4px red solid;
+}
+
+
+/* Blogs Styling */
+
+.bloglist{
+  margin-top: 10px;
+  min-width: 290px;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.bloglist-item{
+  margin: 8px 0;
+  padding: 10px 20px;
+  border: 1px whitesmoke solid;
+  flex-shrink: 0;
+}
+
+/* .bloglist-item-heading{
+
+} */
+
+.bloglist-item-heading > button{
+  margin-left: 8px;
+}
+
+#delete-btn{
+  color: whitesmoke;
+  background-color: blue;
+  margin-top: 5px;
+}
