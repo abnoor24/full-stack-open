@@ -10,12 +10,12 @@ import User from '../model/User.js'
 const api = supertest(app)
 
 const users = [{
-        username: 'mantis',
-        name: 'romeira',
-        password: 'headshot'
-      }]
+  username: 'mantis',
+  name: 'romeira',
+  password: 'headshot'
+}]
 
-beforeEach(async ()=>{
+beforeEach(async () => {
   await User.deleteMany({})
 
   for(const user of users){
@@ -28,21 +28,21 @@ beforeEach(async ()=>{
 describe("User database tests:", () => {
 
   describe('GET requests', () => {})
-  
+
   describe('POST requests:', () => {
 
-    test('Empty request', async ()=>{
+    test('Empty request', async () => {
       await api.post('/api/users')
-      .send({})
-      .expect(400)
+        .send({})
+        .expect(400)
     })
 
     test('request with missing keys in object', async () => {
       const testUser = { username: "horse", password: 'oldtownroad' }
 
       await api.post('/api/users')
-      .send(testUser)
-      .expect(400) // different error messages based on what values are missing
+        .send(testUser)
+        .expect(400) // different error messages based on what values are missing
     })
 
     test('request with a duplicate username existing in database', async () => {
@@ -53,9 +53,9 @@ describe("User database tests:", () => {
       }
 
       await api.post('/api/users')
-      .send(testUser)
-      .expect(400)
-      .expect({"error": "expected `username` to be unique"})
+        .send(testUser)
+        .expect(400)
+        .expect({"error": "expected `username` to be unique"})
     })
 
     test('Password in less than equal to 3 characters', async () => {
@@ -66,9 +66,9 @@ describe("User database tests:", () => {
       }
 
       await api.post('/api/users')
-      .send(testUser)
-      .expect(400)
-      .expect({ error: 'Password must be greater than 3 characters.' })
+        .send(testUser)
+        .expect(400)
+        .expect({ error: 'Password must be greater than 3 characters.' })
     })
     test('request with the correct data', async () => {
       const testUser = {
@@ -78,8 +78,8 @@ describe("User database tests:", () => {
       }
 
       await api.post('/api/users')
-      .send(testUser)
-      .expect(201)
+        .send(testUser)
+        .expect(201)
 
       const usersInDb = await api.get('/api/users')
       assert.strictEqual(usersInDb.body.length, users.length + 1)
@@ -89,6 +89,6 @@ describe("User database tests:", () => {
 })
 
 
-after(async ()=> {
+after(async () => {
   await mongoose.connection.close()
 })

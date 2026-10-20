@@ -1,18 +1,28 @@
-import Blog from './Blog'
+import { Link } from 'react-router-dom'
+import { List, ListItem, ListItemButton, ListItemText, Typography } from '@mui/material'
 
-const BlogList = ({ blogs, setBlogs, notify }) => {
-  const sortBlogbyLikes = blogs.toSorted((a,b) => b.likes-a.likes)
-  const blogList = sortBlogbyLikes.map(blog =>
-    <Blog
-      key={blog.id}
-      blog={blog}
-      setBlogs = {setBlogs}
-      notify={notify}/>
+const BlogList = ({ blogs }) => {
+  const sortedBlog = blogs.toSorted((a,b) => b.likes-a.likes)
+
+  const blogList = sortedBlog.map(blog => {return (
+    <ListItem key={blog.id} disablePadding>
+      <ListItemButton component={Link} to={`/blogs/${blog.id}`}>
+        <ListItemText
+          primary={blog.title}
+          secondary={`By ${blog.author}`}
+        />
+      </ListItemButton>
+    </ListItem>
   )
+  })
   return <>
-    <div className="bloglist">
+    <Typography variant="h5" component="h5" sx={{ margin: '20px 0', fontWeight: 600 }}>
+      Blogs:
+    </Typography>
+
+    <List>
       {blogList}
-    </div>
+    </List>
   </>
 }
 

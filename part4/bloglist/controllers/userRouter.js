@@ -34,5 +34,4 @@ userRouter.post('/', async (req,res,next) => {
   }catch(e){next(e)}
 })
 
-
 export default userRouter

@@ -1,11 +1,8 @@
-import clsx from 'clsx'
+import { Alert } from '@mui/material'
 
 export default function Notification({ notification }){
-  const { message, isError } = notification
-  if(!message)
+  if(!notification)
     return null
 
-  const className = clsx('notification', isError && 'error-msg')
-
-  return <div className= {className}>{message}</div>
+  return <Alert severity={notification.type} sx={{ margin: '10px 0' }}>{notification.message}</Alert>
 }

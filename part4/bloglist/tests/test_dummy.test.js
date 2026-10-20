@@ -72,8 +72,8 @@ test('dummy returns one', () => {
 })
 
 
-describe('total likes', () =>{
-  test('When list has one blog: totalLikes = likes', ()=>{
+describe('total likes', () => {
+  test('When list has one blog: totalLikes = likes', () => {
     const result = listHelper.totalLikes(listWithOneBlog)
     assert.strictEqual(result,5)
   })

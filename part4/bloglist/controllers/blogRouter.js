@@ -25,6 +25,8 @@ blogRouter.get('/:id', async (req,res,next) => {
   }catch(error){next(error)}
 })
 
+
+
 blogRouter.post('/', userExtractor ,async (req, res,next) => {
   try{
     const newBlog = req.body
@@ -100,7 +102,7 @@ blogRouter.put('/likes/:id', userExtractor , async (req,res,next) => {
       req.params.id,
       { likes: blog.likes + 1 },
       { returnDocument: 'after' }
-    )
+    ).populate('user', { username: 1, name: 1, id: 1 })
 
     if (!updatedBlog)
       return res.status(404).json({ error: 'Blog not found' })

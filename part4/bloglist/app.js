@@ -1,10 +1,11 @@
-import { MONGODB_URI } from './utils/config.js'
+import { MONGODB_URI, NODE_ENV } from './utils/config.js'
 import * as middleware from './utils/middleware.js'
 import express from 'express'
 import mongoose from 'mongoose'
 import blogRouter from './controllers/blogRouter.js'
 import userRouter from './controllers/userRouter.js'
 import loginRouter from './controllers/loginRouter.js'
+import testRouter from'./controllers/testRouter.js'
 
 const app = express()
 
@@ -23,6 +24,10 @@ app.use(middleware.getTokenFrom)
 app.use('/api/login', loginRouter)
 app.use('/api/blogs', blogRouter)
 app.use('/api/users', userRouter)
+
+if (NODE_ENV === 'test') {
+  app.use('/api/testing', testRouter)
+}
 
 app.use(middleware.errorHandler)
 

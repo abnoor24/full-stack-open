@@ -1,31 +1,41 @@
+import { Typography, Button, TextField, Box } from '@mui/material'
+
 export default function BlogForm({ createBlog }){
   return <form className="form" action={createBlog}>
-    <h4>Create new:</h4>
+    <Typography variant="h4" component="h4" sx={{ margin: '20px 0' }}>
+      Create new:
+    </Typography>
 
-    <label>
-      <span>Title:</span>
-      <input
+    <Box sx={{ width: '300px' }}>
+      <TextField
+        variant="standard"
+        label="Title:"
         type="text"
         name="title"
+        data-testid="title-input"
+        sx={{ display: 'block', mb: 2 }}
+        fullWidth
       />
-    </label>
-
-    <label>
-      <span>Author:</span>
-      <input
+      <TextField
+        variant="standard"
+        label="Author:"
         type="text"
         name="author"
+        data-testid="author-input"
+        sx={{ display: 'block', mb: 2 }}
+        fullWidth
       />
-    </label>
-
-    <label>
-      <span>URL:</span>
-      <input
+      <TextField
+        variant="standard"
+        label="URL:"
         type="text"
         name="url"
+        data-testid="url-input"
+        sx={{ display: 'block', mb: 2 }}
+        fullWidth
       />
-    </label>
 
-    <button>Create</button>
+      <Button variant='contained' type="submit">Create</Button>
+    </Box>
   </form>
 }

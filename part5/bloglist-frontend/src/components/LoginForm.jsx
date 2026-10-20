@@ -1,25 +1,29 @@
+import { Typography, Button, TextField } from '@mui/material'
 
 const LoginForm = (props) => {
   return <form action={props.handleLogin}className="form">
-    <h2>Log in to application:</h2>
+    <Typography variant="h4" component="h4" sx={{ margin: '20px 0', fontWeight: 500 }}>
+      Log in to application:
+    </Typography>
 
-    <label>
-      <span>Username:</span>
-      <input
-        type="text"
-        name="username"
-      />
-    </label>
+    <TextField
+      id="username-input"
+      variant="standard"
+      label="Username:"
+      type="text"
+      name="username"
+      sx={{ display: 'block', mb: 2 }}
+    />
 
-    <label>
-      <span>Password:</span>
-      <input
-        type="password"
-        name="password"
-      />
-    </label>
-
-    <button>Login</button>
+    <TextField
+      id="password-input"
+      variant="standard"
+      label="Password:"
+      type= 'password'
+      name= 'password'
+      sx={{ display: 'block', mb: 2 }}
+    />
+    <Button variant='contained' type="submit">Login</Button>
   </form>
 }
 

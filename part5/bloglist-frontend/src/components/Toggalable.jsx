@@ -14,10 +14,10 @@ export default function Toggalable(props){
   })
 
   return <div>
-    {visible && <div>
+    {!visible && <div>
       <button onClick={toggleVisibility}>{props.buttonLabel}</button>
     </div>}
-    {(!visible) && <div>
+    {(visible) && <div>
       {props.children}
       <button onClick={toggleVisibility}>Cancel</button>
     </div>}
